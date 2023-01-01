@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-// import { addNewContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
 import {
   FormInputStyled,
@@ -10,11 +9,12 @@ import {
   BtnStyled,
 } from './ContactForm.styled';
 import { useState } from 'react';
+import { addContact } from 'redux/operations';
 
 export function ContactForm() {
   const contacts = useSelector(getContacts);
-  // const dispatch = useDispatch();
-  // const id = nanoid();
+  const dispatch = useDispatch();
+
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
@@ -43,10 +43,12 @@ export function ContactForm() {
 
     const contactName = name.value;
     const contactNumber = number.value;
-    const contactsLists = [...contacts];
+    const contactsList = [...contacts];
+
+    console.log(contactsList);
 
     if (
-      contactsLists.find(
+      contactsList.find(
         contact => contactName.toLowerCase() === contact.name.toLowerCase()
       )
     ) {
@@ -56,7 +58,7 @@ export function ContactForm() {
       setName('');
       return;
     }
-    if (contactsLists.find(contact => contactNumber === contact.number)) {
+    if (contactsList.find(contact => contactNumber === contact.number)) {
       toast.warn(
         `Number ${contactNumber} is already in contacts. Enter another number`
       );
@@ -64,7 +66,7 @@ export function ContactForm() {
       return;
     }
 
-    // dispatch(addNewContact({ id, name: contactName, number: contactNumber }));
+    dispatch(addContact({ name: contactName, number: contactNumber }));
     toast.success(`Contact ${contactName} successfully added`);
     reset();
   };
