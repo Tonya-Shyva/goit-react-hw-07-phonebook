@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { BtnStyled } from 'components/ContactForm/ContactForm.styled';
-import { deleteContact } from 'redux/contactsSlice';
+// import { deleteContact } from 'redux/contactsSlice';
 import { getContacts, getFilter } from 'redux/selectors';
 import {
   ContactItem,
@@ -14,8 +14,8 @@ import {
 export const Contacts = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
-  const handleDelete = contactId => dispatch(deleteContact(contactId));
+  // const dispatch = useDispatch();
+  // const handleDelete = contactId => dispatch(deleteContact(contactId));
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -39,7 +39,10 @@ export const Contacts = () => {
           {getFilteredContacts().map((contact, id) => (
             <ContactItem key={id}>
               {contact.name}: {contact.number}
-              <BtnStyled type="button" onClick={() => handleDelete(contact.id)}>
+              <BtnStyled
+                type="button"
+                // onClick={() => handleDelete(contact.id)}
+              >
                 Delete
               </BtnStyled>
             </ContactItem>

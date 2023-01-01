@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-import { addNewContact } from 'redux/contactsSlice';
+// import { addNewContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
 import {
   FormInputStyled,
@@ -13,8 +13,8 @@ import { useState } from 'react';
 
 export function ContactForm() {
   const contacts = useSelector(getContacts);
-  const dispatch = useDispatch();
-  const id = nanoid();
+  // const dispatch = useDispatch();
+  // const id = nanoid();
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
@@ -64,7 +64,7 @@ export function ContactForm() {
       return;
     }
 
-    dispatch(addNewContact({ id, name: contactName, number: contactNumber }));
+    // dispatch(addNewContact({ id, name: contactName, number: contactNumber }));
     toast.success(`Contact ${contactName} successfully added`);
     reset();
   };
