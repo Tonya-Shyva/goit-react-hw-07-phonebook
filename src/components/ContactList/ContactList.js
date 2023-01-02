@@ -6,7 +6,9 @@ import { BtnStyled } from 'components/ContactForm/ContactForm.styled';
 import { getContacts, getFilter, getIsLoading } from 'redux/selectors';
 import {
   ContactItem,
+  ContactItemText,
   ContactListStyled,
+  ContactNumber,
   ContactsWrap,
 } from './ContactList.styled';
 import { deleteContact } from 'redux/operations';
@@ -42,7 +44,10 @@ export const Contacts = () => {
         <ContactListStyled>
           {getFilteredContacts().map((contact, id) => (
             <ContactItem key={id}>
-              {contact.name}: {contact.number}
+              <ContactItemText>
+                <span>{contact.name}:</span>
+                <ContactNumber>{contact.number}</ContactNumber>
+              </ContactItemText>
               <BtnStyled type="button" onClick={() => handleDelete(contact.id)}>
                 Delete
               </BtnStyled>
